@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
+import useWidthDetector from "./components/ValueDifferenceDetect/useWidthDetector";
+import GlobalStyle from "./globalStyle.style";
+import AsyncTestPage from "./pages/AsyncTestPage";
+import InfiniteScrollPage from "./pages/InfiniteScrollPage";
+import StarReviewUIPage from "./pages/StarReviewUIPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+
+      <StarReviewUIPage />
+    </>
   );
 }
 
