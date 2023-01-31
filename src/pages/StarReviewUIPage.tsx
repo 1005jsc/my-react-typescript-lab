@@ -12,7 +12,7 @@ const StarReviewUIPage = ({}: StarReviewUIPageProps) => {
       <YellowStarIcon width={`160px`} height={`160px`} />
       {/* <GreyStarIcon width={160} height={160} /> */}
 
-      <StarIcon />
+      <StarIcon width="800px" margin="2px" rating={2.756} />
     </>
   );
 };

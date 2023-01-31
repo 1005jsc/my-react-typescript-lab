@@ -2,49 +2,115 @@ import React from "react";
 import styled from "styled-components";
 import { GreyStarIcon, YellowStarIcon } from "../../assets/icon";
 
-type StarIconProps = {};
+type StarIconProps = {
+  width: string;
+  margin: string;
+  rating: number;
+};
 
-const StarIcon = ({}: StarIconProps) => {
+const StarIcon = ({ rating, width, margin }: StarIconProps) => {
+  const extractNumberOnly = (str: string) => {
+    const onlyNumbersArray = str.match(/[0-9]/g);
+    const onlyNumbers = parseInt(str.match(/[0-9]/g)?.join("")!);
+
+    let unit: string = "";
+    if (onlyNumbersArray) {
+      unit = str
+        .split("")
+        .filter((x) => !onlyNumbersArray.includes(x))
+        .join("");
+    }
+
+    return { onlyNumbers, unit };
+  };
+
+  const { onlyNumbers: onlyNumbersWidth, unit: unitWidth } =
+    extractNumberOnly(width);
+  const { onlyNumbers: onlyNumbersMargin } = extractNumberOnly(margin);
+
+  const widthWithoutMargin = onlyNumbersWidth - 10 * onlyNumbersMargin;
+
+  const widthAndHeight = `${widthWithoutMargin / 5}${unitWidth}`;
+
   return (
     <Container>
       <GreyStarDiv>
-        <IconWrapper width={"160px"} height={`160px`}>
+        <IconWrapper
+          width={widthAndHeight}
+          height={widthAndHeight}
+          margin={margin}
+        >
           <GreyStarIcon width={`100%`} height={`100%`} />
         </IconWrapper>
-
-        <IconWrapper width={"160px"} height={`160px`}>
+        <IconWrapper
+          width={widthAndHeight}
+          height={widthAndHeight}
+          margin={margin}
+        >
           <GreyStarIcon width={`100%`} height={`100%`} />
         </IconWrapper>
-
-        <IconWrapper width={"160px"} height={`160px`}>
+        <IconWrapper
+          width={widthAndHeight}
+          height={widthAndHeight}
+          margin={margin}
+        >
           <GreyStarIcon width={`100%`} height={`100%`} />
         </IconWrapper>
-
-        <IconWrapper width={"160px"} height={`160px`}>
+        <IconWrapper
+          width={widthAndHeight}
+          height={widthAndHeight}
+          margin={margin}
+        >
           <GreyStarIcon width={`100%`} height={`100%`} />
         </IconWrapper>
-
-        <IconWrapper width={"160px"} height={`160px`}>
+        <IconWrapper
+          width={widthAndHeight}
+          height={widthAndHeight}
+          margin={margin}
+        >
           <GreyStarIcon width={`100%`} height={`100%`} />
         </IconWrapper>
       </GreyStarDiv>
 
       <Div>
-        <YellowStarDiv>
-          {/* <Box></Box> */}
-          <IconWrapper width={"160px"} height={`160px`}>
+        <YellowStarDiv
+          rating={rating}
+          width={onlyNumbersWidth}
+          unit={unitWidth}
+        >
+          <IconWrapper
+            width={widthAndHeight}
+            height={widthAndHeight}
+            margin={margin}
+          >
             <YellowStarIcon width={`100%`} height={`100%`} />
           </IconWrapper>
-          <IconWrapper width={"160px"} height={`160px`}>
+          <IconWrapper
+            width={widthAndHeight}
+            height={widthAndHeight}
+            margin={margin}
+          >
             <YellowStarIcon width={`100%`} height={`100%`} />
           </IconWrapper>
-          <IconWrapper width={"160px"} height={`160px`}>
+          <IconWrapper
+            width={widthAndHeight}
+            height={widthAndHeight}
+            margin={margin}
+          >
             <YellowStarIcon width={`100%`} height={`100%`} />
           </IconWrapper>
-          <IconWrapper width={"160px"} height={`160px`}>
+          <IconWrapper
+            width={widthAndHeight}
+            height={widthAndHeight}
+            margin={margin}
+          >
             <YellowStarIcon width={`100%`} height={`100%`} />
           </IconWrapper>
-          <IconWrapper width={"400px"} height={`400px`}>
+          <IconWrapper
+            width={widthAndHeight}
+            height={widthAndHeight}
+            margin={margin}
+          >
             <YellowStarIcon width={`100%`} height={`100%`} />
           </IconWrapper>
         </YellowStarDiv>
@@ -64,12 +130,14 @@ const GreyStarDiv = styled.div`
   position: relative;
 `;
 const Div = styled.div``;
-const YellowStarDiv = styled.div`
+const YellowStarDiv = styled.div<{
+  rating: number;
+  width: number;
+  unit: string;
+}>`
   display: flex;
-  /* display: inline-block; */
   flex-direction: row;
-
-  width: 370px;
+  width: ${({ rating, width, unit }) => `${(rating / 5) * width}${unit}`};
   overflow: hidden;
 
   position: absolute;
@@ -77,11 +145,13 @@ const YellowStarDiv = styled.div`
   top: 0;
 `;
 
-const IconWrapper = styled.div<{ width: string; height: string }>`
-  /* display: inline-block; */
+const IconWrapper = styled.div<{
+  width: string;
+  height: string;
+  margin: string;
+}>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   flex: 0 0 auto;
-  margin: 2px;
-  border: 1px solid black;
+  margin: ${({ margin }) => margin};
 `;
