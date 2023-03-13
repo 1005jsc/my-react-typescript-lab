@@ -6,5 +6,6 @@
 서버 명령어 : yarn json-server --watch db.json --port 3001
 
 목차 :
+sdfsdfds
 
 - 별점UI만들기: 예) 평점 4.36점을 별 이미지로 표시하기
